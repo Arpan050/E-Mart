@@ -4,7 +4,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 // 🧭 User Pages
 import Home from "./pages/Home";
 import Categorypage from "./pages/Categorypage";
-import Offerspage from "./pages/Offerspage";
+import OffersPage from "./pages/OffersPage";
 import Products from "./pages/Products";
 import ShopsPage from "./pages/Shopspage";
 import Cart from "./pages/Cart";
@@ -69,7 +69,7 @@ const App = () => {
             path="/offers"
             element={
               <ProtectedRoute allowedRoles={["user"]}>
-                <Offerspage />
+                <OffersPage />
               </ProtectedRoute>
             }
           />

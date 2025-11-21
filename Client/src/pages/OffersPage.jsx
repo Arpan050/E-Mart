@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard";
 
-const Offerspage = () => {
+const OffersPage = () => {
   const [offerProducts, setOfferProducts] = useState([]);
 
   const fetchOffers = async () => {
@@ -39,4 +39,4 @@ const Offerspage = () => {
   );
 };
 
-export default Offerspage;
+export default OffersPage;

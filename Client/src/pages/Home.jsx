@@ -1,7 +1,7 @@
 import React from "react";
 import Banner from "../components/Banner";
 import Categories from "../components/Categories";
-import Offerspage from "../pages/Offerspage.jsx";
+import Offerspage from "./OffersPage.jsx";
 import ShopsPage from "./Shopspage.jsx";
 
 const Home = () => {
