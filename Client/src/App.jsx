@@ -61,7 +61,7 @@ const App = () => {
             path="/category/:categoryName"
             element={
               <ProtectedRoute allowedRoles={["user"]}>
-                <Categorypage />
+                <CategoryPage />
               </ProtectedRoute>
             }
           />
