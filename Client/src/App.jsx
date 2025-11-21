@@ -3,7 +3,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 
 // 🧭 User Pages
 import Home from "./pages/Home";
-import Categorypage from "./pages/Categorypage";
+import CategoryPage from "./pages/Categorypage";
 import OffersPage from "./pages/OffersPage";
 import Products from "./pages/Products";
 import ShopsPage from "./pages/Shopspage";
