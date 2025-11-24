@@ -64,10 +64,16 @@ const server = http.createServer(app);
 
 const io = new IOServer(server, {
   cors: {
-    origin: ["http://localhost:5173", "http://localhost:5174","https://e-mart-dass.vercel.app"],
+    origin: [
+      "http://localhost:5173",
+      "http://localhost:5174",
+      "https://e-mart-dass.vercel.app"
+    ],
+    methods: ["GET", "POST"],
     credentials: true,
   },
 });
+
 
 // Attach io globally
 app.set("io", io);
