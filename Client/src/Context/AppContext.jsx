@@ -16,7 +16,7 @@ export const AppContext = createContext();
 
 /* ---------------- SOCKET INITIALIZATION ---------------- */
 const socket = io(
-  import.meta.env.VITE_SOCKET_URL?.replace("/api", "") ||
+  import.meta.env.VITE_SOCKET_URL||
     "http://localhost:3000",
   {
     withCredentials: true,
@@ -239,6 +239,27 @@ export const AppContextProvider = ({ children }) => {
     }
   }, [fetchCart]);
 
+
+ const fetchNearbyShopkeepers = useCallback(async (lat, lng, radiusKm = 2) => {
+  try {
+    const res = await API.get(
+      `/shopkeepers/near?lat=${lat}&lng=${lng}&radiusKm=${radiusKm}`
+    );
+
+    if (res.data?.shopkeepers) {
+      setShopkeepers(res.data.shopkeepers);
+    }
+
+    return res.data?.shopkeepers || [];
+  } catch (err) {
+    console.error("Nearby shopkeepers fetch error:", err);
+    return [];
+  }
+}, []);
+
+
+
+
   /* ---------------- CONTEXT VALUE ---------------- */
   const value = useMemo(
     () => ({
@@ -279,6 +300,8 @@ export const AppContextProvider = ({ children }) => {
       setNotifications,
       fetchNotifications,
       markNotificationRead,
+
+      fetchNearbyShopkeepers,
     }),
     [
       initialized,

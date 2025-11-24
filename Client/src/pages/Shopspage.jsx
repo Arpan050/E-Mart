@@ -52,7 +52,7 @@ const ShopsPage = () => {
         }
 
         // 🔹 Fetch nearby shopkeepers
-        const shops = await fetchNearbyShopkeepers(lat, lng, 3);
+        const shops = await fetchNearbyShopkeepers(lat, lng, 2);
         setNearbyShops(shops);
       } catch (err) {
         setError(err.message || "Failed to load nearby shops");

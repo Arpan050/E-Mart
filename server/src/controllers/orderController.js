@@ -33,6 +33,7 @@ export const createOrder = async (req, res) => {
         name: product.name,
         price: product.price,
         quantity: it.quantity,
+        image: product.images?.[0], 
       });
     }
 
@@ -79,7 +80,7 @@ export const getUserOrders = async (req, res) => {
 
     const orders = await Order.find({ user: userId })
       .populate("shopkeeper", "username email location")
-      .populate("items.product", "name images")
+      .populate("items.product", "name images price")
       .sort({ createdAt: -1 });
 
     res.json({ success: true, orders });
@@ -203,5 +204,24 @@ export const updateOrderStatus = async (req, res) => {
   } catch (error) {
     console.error("❌ updateOrderStatus error:", error);
     res.status(500).json({ message: "Failed to update order" });
+  }
+};
+
+
+export const getOrderDetails = async (req, res) => {
+  try {
+    const order = await Order.findById(req.params.id)
+      .populate("user", "username email location")
+      .populate("shopkeeper", "username email location")
+      .populate("items.product", "name images price");
+
+    if (!order) {
+      return res.status(404).json({ message: "Order not found" });
+    }
+
+    res.json({ success: true, order });
+  } catch (error) {
+    console.error("getOrderDetails error:", error);
+    res.status(500).json({ message: error.message });
   }
 };

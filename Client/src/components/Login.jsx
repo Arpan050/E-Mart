@@ -211,7 +211,7 @@ const showToast = (msg, type="success") => {
                   <span className="text-yellow-600 font-bold text-lg">U</span>
                 </div>
               </Link>
-              <h1 className="text-white font-bold text-2xl">umls</h1>
+              <h1 className="text-white font-bold text-2xl">E-Mart</h1>
             </div>
           </div>
 

@@ -20,6 +20,8 @@ import Orders from "./pages/Shopkeeper/Orders";
 import AddProduct from "./pages/Shopkeeper/AddProduct";
 import ShopkeeperDashboard from "./pages/Shopkeeper/ShopkeeperDashboard";
 import ShopkeeperSettings from "./pages/Shopkeeper/ShopkeeperSettings";
+import ShopkeeperOrderDetails from "./pages/Shopkeeper/ShopkeeperOrderDetails";
+
 
 // Components
 import Navbar from "./components/Navbar";
@@ -145,6 +147,7 @@ const App = () => {
             <Route path="add-product" element={<AddProduct />} />
             <Route path="productlist" element={<ProductList />} />
             <Route path="orders" element={<Orders />} />
+            <Route path="order-details/:id" element={<ShopkeeperOrderDetails />} />
           </Route>
         </Routes>
       </div>

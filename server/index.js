@@ -19,29 +19,22 @@ dotenv.config();
 
 const app = express();
 
-/* ---------------------------------------------------
-   CORS
------------------------------------------------------ */
+
 app.use(
   cors({
-    origin: ["http://localhost:5173", "http://localhost:5174"],
+    origin: ["http://localhost:5173", "http://localhost:5174", "https://e-mart-dass.vercel.app"],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
-/* ---------------------------------------------------
-   🚨 RAZORPAY WEBHOOK (MUST BE BEFORE express.json)
------------------------------------------------------ */
 app.use(
   "/api/payments/razorpay/webhook",
   bodyParser.raw({ type: "application/json" })
 );
 
-/* ---------------------------------------------------
-   NORMAL JSON PARSER
------------------------------------------------------ */
+
 app.use(express.json());
 
 /* Debug middleware */
@@ -52,9 +45,7 @@ app.use((req, res, next) => {
 
 app.use("/uploads", express.static("Public/images/"));
 
-/* ---------------------------------------------------
-   ROUTES
------------------------------------------------------ */
+
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/cart", cartRoutes);
@@ -68,9 +59,7 @@ app.get("/", (req, res) => {
   res.send("E-Mart API running...");
 });
 
-/* ---------------------------------------------------
-   🧩 SOCKET.IO SETUP
------------------------------------------------------ */
+
 const server = http.createServer(app);
 
 const io = new IOServer(server, {
@@ -85,22 +74,20 @@ app.set("io", io);
 
 // Socket.io events
 io.on("connection", (socket) => {
-  console.log("⚡ User connected:", socket.id);
+  console.log(" User connected:", socket.id);
 
   // join room using shopkeeper/user id
   socket.on("join", (userId) => {
     socket.join(userId);
-    console.log(`📌 User joined room: ${userId}`);
+    console.log(`User joined room: ${userId}`);
   });
 
   socket.on("disconnect", () => {
-    console.log("❌ User disconnected:", socket.id);
+    console.log("User disconnected:", socket.id);
   });
 });
 
-/* ---------------------------------------------------
-   START SERVER
------------------------------------------------------ */
+
 connectDb()
   .then(() => {
     server.listen(process.env.PORT || 3000, () => {
